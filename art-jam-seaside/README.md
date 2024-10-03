@@ -10,8 +10,6 @@ This description should help the reader understand what the program is, what any
 
 ## Credits
 
-This bit should describe what tools were used. For example:
-
 This project uses [p5.js](https://p5js.org).
 
 ## Attribution
