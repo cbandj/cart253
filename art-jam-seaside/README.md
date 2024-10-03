@@ -1,6 +1,6 @@
-# Template p5 Project
+# Art Jam : By the Seaside
 
-Author Name
+Carael Bandojo
 
 [View this project online](URL_FOR_THE_RUNNING_PROJECT)
 
