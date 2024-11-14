@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Animated AR.js Demo</title>
+ <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+ <style>
+ body, html {
+ margin: 0;
+ overflow: hidden;
+ font-family: Arial, sans-serif;
+ }
+ #startButton {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background-color: #007BFF;
+ color: white;
+ padding: 10px 20px;
+ font-size: 18px;
+ border: none;
+ cursor: pointer;
+ z-index: 10;
+ }
+ </style>
+</head>
+<body>
+<button id="startButton" onclick="startAR()">Start AR Experience</button>
+<a-scene embedded arjs style="display: none;" id="ar-scene">
+ <a-marker preset="hiro">
+ <!-- Animated Box -->
+ <a-box position="0 0.5 0" color="blue" scale="0.5 0.5 0.5"
+ animation="property: rotation; to: 0 360 0; loop: true; dur: 4000"></a-box>
+ <!-- Bouncing Sphere -->
+ <a-sphere position="0.5 0.7 0" radius="0.25" color="yellow"
+ animation="property: position; to: 0.5 1.2 0; dir: alternate; loop: true; dur:
+1000"></a-sphere>
+ <!-- Pulsing Cylinder -->
+ <a-cylinder position="-0.5 0.3 0" radius="0.2" height="0.5" color="green"
+ animation="property: scale; to: 0.4 1 0.4; dir: alternate; loop: true; dur: 1500"></acylinder>
+ </a-marker>
+ <a-entity camera></a-entity>
+</a-scene>
+<script>
+ function startAR() {
+ document.getElementById('startButton').style.display = 'none';
+ document.getElementById('ar-scene').style.display = 'block';
+ setTimeout(() => {
+ const video = document.querySelector('video');
+ if (video) {
+ video.setAttribute('playsinline', '');
+ video.play().catch(error => console.error("Video playback failed:", error));
+ }
+ }, 1000);
+ }
+</script>
+</body>
+</html>
+• Explanation of the Animations:
+• Rotating Box: The box rotates 360 degrees along the Y-axis continuously.
+• Bouncing Sphere: The sphere moves up and down in an alternating direction, creating a
+bouncing effect.
+• Pulsing Cylinder: The cylinder changes its scale in an alternating direction, creating a
+pulsing effect.
+• Run the File: Open ar_animated.html in your browser and click the Start AR Experience
+button to see the animations in action.
+Part 3: Challenges
+Choose any two of the following challenges to extend your AR skills. Try experimenting with
+interactivity, additional models, and sound effects!
+Challenge 1: Create a Custom Marker
+Replace the hiro marker with a custom pattern marker, which you can generate and add to your
+AR scene.
+1. Generate a Custom Marker: Visit the AR.js Marker Training Tool to create your
+custom pattern. (google the location)
+2. Download the .patt file and add it to your project.
+3. Replace the Hiro Marker: Update your code to use the new marker.
+<a-marker type="pattern" url="path/to/your_custom_marker.patt">
+ <a-box position="0 0.5 0" color="purple" scale="0.5 0.5 0.5"></a-box>
+</a-marker>
+Challenge 2: Multiple Markers with Unique Content
+Add a second marker to your AR scene with its own unique 3D shapes or models.
+1. Add a Second Marker: Use the kanji marker as an additional marker in your scene.
+2. Add Different Content: Place different shapes or 3D models on each marker.
+<!-- Hiro Marker -->
+<a-marker preset="hiro">
+ <a-box position="0 0.5 0" color="blue" scale="0.5 0.5 0.5"></a-box>
+</a-marker>
+<!-- Kanji Marker -->
+<a-marker preset="kanji">
+ <a-sphere position="0 0.5 0" color="red" radius="0.3"></a-sphere>
+</a-marker>
+Challenge 3: Advanced Interactivity with Multiple Effects
+Allow each shape to perform multiple actions (e.g., color change, scale change) when clicked.
+1. Add Event Listeners: Use JavaScript to handle clicks and apply multiple effects.
+2. Example:
+<a-box id="box" position="0 0.5 0" color="blue" scale="0.5 0.5 0.5" onclick="changeBox()"></a-box>
+<script>
+ function changeBox() {
+ const box = document.getElementById('box');
+ box.setAttribute('color', 'purple');
+ box.setAttribute('scale', '0.7 0.7 0.7');
+ }
+</script>
+Challenge 4: Animation Controls
+Combine animations with user interactions to start, stop, or change animations based on clicks.
+1. Define Animations: Use the animation attribute to define movements or rotations.
+2. Add Controls: Use a button or click event to start and stop the animations.
+<a-box id="box" position="0 0.5 0" color="blue" scale="0.5 0.5 0.5"
+ animation="property: rotation; to: 0 360 0; loop: true; dur: 4000"
+ onclick="toggleAnimation()"></a-box>
+<script>
+ let isAnimating = true;
+ function toggleAnimation() {
+ const box = document.getElementById('box');
+ if (isAnimating) {
+ box.setAttribute('animation', 'pause', true);
+ } else {
+ box.setAttribute('animation', 'resume', true);
+ }
+ isAnimating = !isAnimating;
+ }
+</script>
